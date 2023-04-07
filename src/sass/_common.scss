@@ -1,1 +1,8 @@
 @import '~node_modules/modern-normalize/modern-normalize.css';
+
+.photo-card {
+    width: calc(25% - 20px);
+    margin: 10px;
+    display: inline-block;
+    vertical-align: top;
+}

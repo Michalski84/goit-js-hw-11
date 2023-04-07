@@ -1,2 +1,10 @@
 @import './common';
 @import './example';
+
+.search-form {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    background-color: darkslateblue;
+    justify-content: center;
+}
