@@ -25,8 +25,6 @@ input.style.justifyContent = 'center';
 input.style.alignItems = 'center';
 input.style.height = '30px';
 button.style.height = '30px';
-gallery.style.dispaly = 'flex';
-gallery.style.flexDirection = 'row';
 
 const lightbox = new SimpleLightbox('.gallery a', {
   closeText: 'x',
@@ -150,7 +148,12 @@ function createCard(image) {
   const container = document.querySelector('.gallery');
   container.appendChild(card);
   container.style.marginTop = '60px';
-  card.style.boxShadow = '16px 7px 25px -11px rgba(66, 68, 90, 0.59)';
+  container.style.display = 'flex';
+  container.style.flexDirection = 'row';
+  container.style.flexWrap = 'wrap';
+  container.style.justifyContent = 'center';
+  card.style.boxShadow = '0px 0px 15px 0px rgba(66, 68, 90, 0.59)';
+  card.style.width = '420px';
 }
 
 function showNotification(message) {
