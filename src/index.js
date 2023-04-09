@@ -47,7 +47,17 @@ async function handleSubmit(event) {
   try {
     const images = await fetchImages(searchQuery);
     showImages(images);
-    loadMoreButton.style.display = 'block';
+    loadMoreButton.style.display = 'flex';
+    loadMoreButton.style.justifyContent = 'center';
+    loadMoreButton.style.marginTop = '50px';
+    loadMoreButton.style.marginBottom = '50px';
+    loadMoreButton.style.backgroundColor = '#483D8B';
+    loadMoreButton.style.color = 'white';
+    loadMoreButton.style.height = '50px';
+    loadMoreButton.style.width = '150px';
+    loadMoreButton.style.alignItems = 'center';
+    loadMoreButton.style.marginLeft = 'auto';
+    loadMoreButton.style.marginRight = 'auto';
   } catch (error) {
     console.error(error);
     showNotification('Sorry, there was an error. Please try again.');
