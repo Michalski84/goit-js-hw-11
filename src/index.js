@@ -33,6 +33,7 @@ const lightbox = new SimpleLightbox('.gallery a', {
 
 form.addEventListener('submit', handleSubmit);
 loadMoreButton.addEventListener('click', handleLoadMore);
+input.addEventListener('input', handleInput);
 
 async function handleSubmit(event) {
   event.preventDefault();
@@ -45,32 +46,23 @@ async function handleSubmit(event) {
   }
 
   try {
+    gallery.innerHTML = '';
     const images = await fetchImages(searchQuery);
     showImages(images);
-    loadMoreButton.style.display = 'flex';
-    loadMoreButton.style.justifyContent = 'center';
-    loadMoreButton.style.marginTop = '50px';
-    loadMoreButton.style.marginBottom = '50px';
-    loadMoreButton.style.backgroundColor = '#483D8B';
-    loadMoreButton.style.color = 'white';
-    loadMoreButton.style.height = '50px';
-    loadMoreButton.style.width = '150px';
-    loadMoreButton.style.alignItems = 'center';
-    loadMoreButton.style.marginLeft = 'auto';
-    loadMoreButton.style.marginRight = 'auto';
   } catch (error) {
     console.error(error);
-    showNotification('Sorry, there was an error. Please try again.');
+    Notiflix.Notify.failure('Sorry, there was an error. Please try again.');
   }
 }
 
 async function handleLoadMore() {
   try {
+    gallery.innerHTML = '';
     const images = await fetchImages(searchQuery);
     showImages(images);
   } catch (error) {
     console.error(error);
-    showNotification('Sorry, there was an error. Please try again.');
+    Notiflix.Notify.failure('Sorry, there was an error. Please try again.');
   }
 }
 
@@ -88,7 +80,7 @@ async function fetchImages(searchQuery) {
 
   if (currentPage === totalPages) {
     loadMoreButton.style.display = 'none';
-    showNotification(
+    Notiflix.Notify.failure(
       "We're sorry, but you've reached the end of search results."
     );
   } else {
@@ -104,12 +96,12 @@ function showImages(images) {
   }
 
   if (images.length === 0 && currentPage === 1) {
-    showNotification(
-      'Sorry, there are no images matching your search query. Please try again.'
-    );
     loadMoreButton.style.display = 'none';
     return;
   } else if (images.length === 0) {
+    Notiflix.Notify.failure(
+      'Sorry, there are no images matching your search query. Please try again.'
+    );
     return;
   }
 
@@ -164,11 +156,17 @@ function createCard(image) {
   container.style.justifyContent = 'center';
   card.style.boxShadow = '0px 0px 15px 0px rgba(66, 68, 90, 0.59)';
   card.style.width = '420px';
+  loadMoreButton.style.display = 'flex';
+  loadMoreButton.style.justifyContent = 'center';
+  loadMoreButton.style.marginTop = '50px';
+  loadMoreButton.style.marginBottom = '50px';
+  loadMoreButton.style.backgroundColor = '#483D8B';
+  loadMoreButton.style.color = 'white';
+  loadMoreButton.style.height = '50px';
+  loadMoreButton.style.width = '150px';
+  loadMoreButton.style.alignItems = 'center';
+  loadMoreButton.style.marginLeft = 'auto';
+  loadMoreButton.style.marginRight = 'auto';
 }
 
-function showNotification(message) {
-  Notiflix.Notify.failure(message, {
-    position: 'center',
-    timeout: 3000,
-  });
-}
+
